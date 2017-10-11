@@ -64,6 +64,7 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             [MBHUD showTitle:@"欲买桂花同载酒，终不似，少年游" onView:self.view];
+            [MBHUD superViewUserInteractionEnabled];
         }
     }
     if (indexPath.section == 1) {
