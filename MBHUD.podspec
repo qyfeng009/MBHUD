@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 #
 
 s.name         = "MBHUD"
-s.version      = "0.0.1"
+s.version      = "0.0.2"
 s.summary      = "站在巨人的肩上，MBProgressHUD 简单封装"
 
 # This description is used to generate tags and improve search results.
@@ -117,8 +117,8 @@ s.resources = "MBHUD/MBHUD/MBHUD.bundle"
 #  the lib prefix of their name.
 #
 
-s.framework  = "UIKit"
-# s.frameworks = "SomeFramework", "AnotherFramework"
+# s.framework  = "UIKit"
+s.frameworks = "UIKit", "Foundation"
 
 # s.library   = "iconv"
 # s.libraries = "iconv", "xml2"
@@ -133,7 +133,7 @@ s.framework  = "UIKit"
 s.requires_arc = true
 
 # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-s.dependency 'MBProgressHUD'
+s.dependency 'MBProgressHUD', '~> 1.0.0'
 
 end
 
