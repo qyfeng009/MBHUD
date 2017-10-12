@@ -300,7 +300,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
     }
     MBProgressHUDCompletionBlock completionBlock = self.completionBlock;
     if (completionBlock) {
-        completionBlock();
+        completionBlock(@"");
     }
     id<MBProgressHUDDelegate> delegate = self.delegate;
     if ([delegate respondsToSelector:@selector(hudWasHidden:)]) {
@@ -1276,7 +1276,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
     [self showAnimated:animated whileExecutingBlock:block onQueue:queue completionBlock:NULL];
 }
 
-- (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block completionBlock:(void (^)())completion {
+- (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block completionBlock:(void (^)(id _Nonnull sender))completion {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     [self showAnimated:animated whileExecutingBlock:block onQueue:queue completionBlock:completion];
 }

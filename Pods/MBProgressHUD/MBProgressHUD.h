@@ -69,10 +69,10 @@ typedef NS_ENUM(NSInteger, MBProgressHUDBackgroundStyle) {
     MBProgressHUDBackgroundStyleBlur
 };
 
-typedef void (^MBProgressHUDCompletionBlock)();
+typedef void (^MBProgressHUDCompletionBlock)(id _Nonnull sender);
 
 
-//NS_ASSUME_NONNULL_BEGIN
+NS_ASSUME_NONNULL_BEGIN
 
 
 /** 
