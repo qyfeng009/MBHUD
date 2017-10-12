@@ -80,7 +80,10 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
     NSEnumerator *subviewsEnum = [view.subviews reverseObjectEnumerator];
     for (UIView *subview in subviewsEnum) {
         if ([subview isKindOfClass:self]) {
-            return (MBProgressHUD *)subview;
+            MBProgressHUD *hud = (MBProgressHUD *)subview;
+            if (hud.hasFinished == NO) {
+                return hud;
+            }
         }
     }
     return nil;
@@ -300,7 +303,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
     }
     MBProgressHUDCompletionBlock completionBlock = self.completionBlock;
     if (completionBlock) {
-        completionBlock(@"");
+        completionBlock();
     }
     id<MBProgressHUDDelegate> delegate = self.delegate;
     if ([delegate respondsToSelector:@selector(hudWasHidden:)]) {
@@ -784,7 +787,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
 - (void)updateForCurrentOrientationAnimated:(BOOL)animated {
     // Stay in sync with the superview in any case
     if (self.superview) {
-        self.bounds = self.superview.bounds;
+        self.frame = self.superview.bounds;
     }
 
     // Not needed on iOS 8+, compile out when the deployment target allows,
@@ -1276,7 +1279,7 @@ static const CGFloat MBDefaultDetailsLabelFontSize = 12.f;
     [self showAnimated:animated whileExecutingBlock:block onQueue:queue completionBlock:NULL];
 }
 
-- (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block completionBlock:(void (^)(id _Nonnull sender))completion {
+- (void)showAnimated:(BOOL)animated whileExecutingBlock:(dispatch_block_t)block completionBlock:(void (^)(void))completion {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     [self showAnimated:animated whileExecutingBlock:block onQueue:queue completionBlock:completion];
 }
