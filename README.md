@@ -50,9 +50,9 @@ If you added `MBHUD` manually, just add a [bridging header](https://developer.ap
 
 **Use `MBHUD` wisely! Only use it if you absolutely need to perform a task before taking the user forward. Bad use case examples: pull to refresh, infinite scrolling, sending message.**
 
-Using `SVProgressHUD` in your app will usually look as simple as this (using Grand Central Dispatch):
+Using `MBHUD` in your app will usually look as simple as this (using Grand Central Dispatch):
 ```objective-c
-[SVProgressHUD showLoading:nil onView:nil];
+[MBHUD showLoading:nil onView:nil];
 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     // time-consuming task
     dispatch_async(dispatch_get_main_queue(), ^{
