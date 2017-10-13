@@ -115,6 +115,4 @@ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
 This code is distributed under the terms and conditions of the [MIT license](LICENSE).
 
-## Change-log
 
-A brief summary of each MBProgressHUD release can be found in the [CHANGELOG](CHANGELOG.mdown). 
