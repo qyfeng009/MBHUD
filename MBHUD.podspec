@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 #
 
 s.name         = "MBHUD"
-s.version      = "0.0.3"
+s.version      = "0.0.4"
 s.summary      = "站在巨人的肩上，MBProgressHUD 简单封装"
 
 # This description is used to generate tags and improve search results.
@@ -91,7 +91,7 @@ s.source       = { :git => "https://github.com/qyfeng009/MBHUD.git", :tag => "#{
 #  Not including the public_header_files will make all headers public.
 #
 
-s.source_files  = "MBHUD", "MBHUD/**/MBHUD.{h,m}"
+s.source_files  = "MBHUD/**/MBHUD.{h,m}"
 # s.exclude_files = "Classes/Exclude"
 
 # s.public_header_files = "Classes/**/*.h"
@@ -133,7 +133,7 @@ s.frameworks = "UIKit", "Foundation"
 s.requires_arc = true
 
 # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-s.dependency 'MBProgressHUD', '~> 1.0.0'
+s.dependency 'MBProgressHUD'
 
 end
 

@@ -5,12 +5,14 @@
 //  Created by 009 on 2017/10/9.
 //  Copyright © 2017年 qyfeng. All rights reserved.
 //
+// 注： 作者在背景图框上加了一层毛玻璃 UIVisualEffectView，如果不需要毛玻璃效果 在MBProgressHUD.m的 1164左右行，注释掉就好了
+// 当 onView 的参数是 nil ，则添加到 window 上。
+// 但是当当前的 ViewController 是 mainWindow 的 rootViewController 时， 在viewDidLoad 方法不能是 nil , 因为当前的 ViewController 还没添加到window上，他会把 MBHUD 盖住
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
 @interface MBHUD : NSObject
-+ (instancetype)share;
 
 
 /**

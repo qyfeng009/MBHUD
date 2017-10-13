@@ -402,6 +402,7 @@
 			baseConfigurationReference = D897FCBF9B82E432CB31A2EB /* Pods-MBHUD.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y56GXB6A3V;
 				INFOPLIST_FILE = MBHUD/Info.plist;
@@ -410,6 +411,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = qyfeng.MBHUD;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = "";
 			};
 			name = Debug;
 		};
@@ -418,6 +420,7 @@
 			baseConfigurationReference = 95B78C78DEAFA564572F65C7 /* Pods-MBHUD.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y56GXB6A3V;
 				INFOPLIST_FILE = MBHUD/Info.plist;
@@ -426,6 +429,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = qyfeng.MBHUD;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = "";
 			};
 			name = Release;
 		};
