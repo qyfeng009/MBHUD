@@ -1,6 +1,6 @@
 //
 //  MBProgressHUD.h
-//  Version 1.0.0
+//  Version 1.1.0
 //  Created by Matej Bukovinski on 2.4.09.
 //
 
@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger, MBProgressHUDBackgroundStyle) {
     MBProgressHUDBackgroundStyleBlur
 };
 
-typedef void (^MBProgressHUDCompletionBlock)();
+typedef void (^MBProgressHUDCompletionBlock)(void);
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -387,6 +387,14 @@ NS_ASSUME_NONNULL_BEGIN
  * @note Due to iOS 7 not supporting UIVisualEffectView, the blur effect differs slightly between iOS 7 and later versions.
  */
 @property (nonatomic) MBProgressHUDBackgroundStyle style;
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000 || TARGET_OS_TV
+/**
+ * The blur effect style, when using MBProgressHUDBackgroundStyleBlur.
+ * Defaults to UIBlurEffectStyleLight.
+ */
+@property (nonatomic) UIBlurEffectStyle blurEffectStyle;
+#endif
 
 /**
  * The background color or the blur tint color.

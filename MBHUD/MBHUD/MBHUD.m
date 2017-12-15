@@ -67,7 +67,7 @@
         self.hud.minSize = self.hud.bezelView.bounds.size;
     }
     [self.hud setRemoveFromSuperViewOnHide:YES];
-    self.hud.animationType = MBProgressHUDAnimationZoomIn;
+    self.hud.animationType = MBProgressHUDAnimationZoom;
 }
 + (void)setHUDBackgroundStyleBlur {
     HUD.backgroundView.style = MBProgressHUDBackgroundStyleBlur;
