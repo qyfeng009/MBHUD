@@ -109,19 +109,13 @@
     });
 }
 - (void)showSuccess:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self showImage: self.successImage title:title];
-    });
+    [self showImage: _successImage title:title];
 }
 - (void)showFailed:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self showImage: self.errorImage title:title];
-    });
+    [self showImage: _errorImage title:title];
 }
 - (void)showWarning:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self showImage: self.warningImage title:title];
-    });
+    [self showImage: _warningImage title:title];
 }
 
 - (void)superViewUserInteractionEnabled {
@@ -142,7 +136,7 @@
         [self setTextStyle:title];
         [self setHUDBackgroundStyleBlur];
         self.hud.bezelView.backgroundColor = [UIColor clearColor];
-        self.hud.backgroundView.backgroundColor = self.superView.backgroundColor;
+        self.hud.backgroundView.backgroundColor = _superView.backgroundColor;
         UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         self.hud.customView = activityIndicatorView;
         [activityIndicatorView startAnimating];
@@ -176,7 +170,7 @@
         [showImageView startAnimating];
         
         self.hud.mode = MBProgressHUDModeCustomView;
-        [self.hud setMargin:0];
+        [_hud setMargin:0];
         self.hud.bezelView.color = [UIColor clearColor];
         self.hud.customView = showImageView;
     });
