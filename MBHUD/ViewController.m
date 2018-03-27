@@ -96,7 +96,7 @@
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         sleep(3.);
         dispatch_async(dispatch_get_main_queue(), ^{
-//            [hud showFailed:@"failed..."];
+            [hud showFailed:@"failed..."];
         });
     });
 }
@@ -116,7 +116,7 @@
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         sleep(3.);
         dispatch_async(dispatch_get_main_queue(), ^{
-//            [hud showFailed:@"failed..."];
+            [hud showFailed:@"failed..."];
         });
     });
 }
@@ -133,10 +133,10 @@
     QAnimationBallClipRotate *ballClipRotate = [[QAnimationBallClipRotate alloc] initWithFrame:CGRectMake(0, 0, 88, 88)];
     QAnimationSuccess *animationSucces = [[QAnimationSuccess alloc] initWithFrame:CGRectMake(0, 0, 88, 88)];
     animationSucces.animationType = QAnimationTypeSuccess;
-//    [hud showCustomView:ballClipRotate];
+    [hud showCustomView:ballClipRotate];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [ballClipRotate removeFromSuperview];
-//        [hud showCustomView:animationSucces];
+        [hud showCustomView:animationSucces];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [hud hide];
         });
