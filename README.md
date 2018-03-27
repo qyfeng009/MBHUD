@@ -9,6 +9,7 @@
 `MBHUD` depends on the `MBProgressHUD`, it is standing on the shoulders of giants, simple encapsulation of MBProgressHUD. 
  In this to pay tribute to the MBProgressHUD.
 
+![MBHUD](https://github.com/qyfeng009/MBHUD/blob/master/MBHUD2.gif)
 ![MBHUD](https://github.com/qyfeng009/MBHUD/blob/master/MBHUD.gif)
 
 ## Installation
