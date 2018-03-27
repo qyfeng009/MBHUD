@@ -129,7 +129,6 @@
     });
 }
 - (void)showLoadingSmall:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
         self.hud.mode = MBProgressHUDModeCustomView;
         [self setTextStyle:title];
         [self setHUDBackgroundStyleBlur];
@@ -138,7 +137,6 @@
         UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         self.hud.customView = activityIndicatorView;
         [activityIndicatorView startAnimating];
-    });
 }
 - (void)showLoadingCircle:(NSString *)title {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -160,7 +158,6 @@
     return imgView;
 }
 - (void)showFrameAnimationWithImageArray:(NSArray *)imagArray {
-    dispatch_async(dispatch_get_main_queue(), ^{
         UIImageView *showImageView = [[UIImageView alloc] init];
         showImageView.animationImages = imagArray;
         [showImageView setAnimationRepeatCount:0];
@@ -171,7 +168,6 @@
         [_hud setMargin:0];
         self.hud.bezelView.color = [UIColor clearColor];
         self.hud.customView = showImageView;
-    });
 }
 - (void)showCustomView:(UIView *)customView {
     dispatch_async(dispatch_get_main_queue(), ^{
