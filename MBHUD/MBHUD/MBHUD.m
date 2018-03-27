@@ -100,8 +100,8 @@
 }
 
 - (void)showImage:(UIImage *)img title:(NSString *)title {
-    self.hud.minSize = self.hud.bezelView.bounds.size;
-    if (self.hud.minSize.width == 0) {
+    self.hud.minSize = _hud.bezelView.bounds.size;
+    if (_hud.minSize.width == 0) {
         self.hud.minSize = CGSizeMake(100, 100);
     }
     self.hud.mode = MBProgressHUDModeCustomView;
@@ -158,7 +158,7 @@
     [showImageView setAnimationRepeatCount:0];
     [showImageView setAnimationDuration:(imagArray.count + 1) * 0.072];
     [showImageView startAnimating];
-    
+
     self.hud.mode = MBProgressHUDModeCustomView;
     [_hud setMargin:0];
     self.hud.bezelView.color = [UIColor clearColor];
