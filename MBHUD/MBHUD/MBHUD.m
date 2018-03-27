@@ -100,14 +100,16 @@
 }
 
 - (void)showImage:(UIImage *)img title:(NSString *)title {
-    self.hud.minSize = _hud.bezelView.bounds.size;
-    if (_hud.minSize.width == 0) {
-        self.hud.minSize = CGSizeMake(100, 100);
-    }
-    self.hud.mode = MBProgressHUDModeCustomView;
-    [self setTextStyle:title];
-    self.hud.customView = [[UIImageView alloc] initWithImage:img];
-    [self hideAfterDelay:[self displayDurationForString:title]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.hud.minSize = _hud.bezelView.bounds.size;
+        if (_hud.minSize.width == 77) {
+            self.hud.minSize = CGSizeMake(100, 100);
+        }
+        self.hud.mode = MBProgressHUDModeCustomView;
+        [self setTextStyle:title];
+        self.hud.customView = [[UIImageView alloc] initWithImage:img];
+        [self hideAfterDelay:[self displayDurationForString:title]];
+    });
 }
 - (void)showSuccess:(NSString *)title {
     [self showImage: _successImage title:title];
@@ -120,23 +122,29 @@
 }
 
 - (void)showLoading:(NSString *)title {
+    dispatch_async(dispatch_get_main_queue(), ^{
         self.hud.mode = MBProgressHUDModeIndeterminate;
         [self setTextStyle:title];
+    });
 }
 - (void)showLoadingSmall:(NSString *)title {
-    self.hud.mode = MBProgressHUDModeCustomView;
-    [self setTextStyle:title];
-    [self setHUDBackgroundStyleBlur];
-    self.hud.bezelView.backgroundColor = [UIColor clearColor];
-    self.hud.backgroundView.backgroundColor = _superView.backgroundColor;
-    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    self.hud.customView = activityIndicatorView;
-    [activityIndicatorView startAnimating];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.hud.mode = MBProgressHUDModeCustomView;
+        [self setTextStyle:title];
+        [self setHUDBackgroundStyleBlur];
+        self.hud.bezelView.backgroundColor = [UIColor clearColor];
+        self.hud.backgroundView.backgroundColor = _superView.backgroundColor;
+        UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        self.hud.customView = activityIndicatorView;
+        [activityIndicatorView startAnimating];
+    });
 }
 - (void)showLoadingCircle:(NSString *)title {
-    self.hud.mode = MBProgressHUDModeCustomView;
-    [self setTextStyle:title];
-    self.hud.customView = [self getCircleLoadingImageView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.hud.mode = MBProgressHUDModeCustomView;
+        [self setTextStyle:title];
+        self.hud.customView = [self getCircleLoadingImageView];
+    });
 }
 - (UIImageView *)getCircleLoadingImageView {
     UIImageView *imgView = [[UIImageView alloc] initWithImage: _circleLoadingImage];
@@ -156,18 +164,21 @@
     [showImageView setAnimationRepeatCount:0];
     [showImageView setAnimationDuration:(imagArray.count + 1) * 0.072];
     [showImageView startAnimating];
-
-    self.hud.mode = MBProgressHUDModeCustomView;
-    [_hud setMargin:0];
-    self.hud.bezelView.color = [UIColor clearColor];
-    self.hud.customView = showImageView;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.hud.mode = MBProgressHUDModeCustomView;
+        [_hud setMargin:0];
+        self.hud.bezelView.color = [UIColor clearColor];
+        self.hud.customView = showImageView;
+    });
 }
 - (void)showCustomView:(UIView *)customView {
-    self.hud.mode = MBProgressHUDModeCustomView;
-    self.hud.customView = nil;
-    [self.hud setMargin:0];
-    self.hud.minSize = customView.bounds.size;
-    [self.hud.bezelView addSubview: customView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.hud.mode = MBProgressHUDModeCustomView;
+        self.hud.customView = nil;
+        [self.hud setMargin:0];
+        self.hud.minSize = customView.bounds.size;
+        [self.hud.bezelView addSubview: customView];
+    });
 }
 
 - (void)hide {
@@ -187,20 +198,27 @@
 }
 
 - (void)showDeterminate:(NSString *)title {
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self setTextStyle:title];
         self.hud.mode = MBProgressHUDModeDeterminate;
+    });
 }
 - (void)showAnnularDeterminate:(NSString *)title {
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self setTextStyle:title];
         self.hud.mode = MBProgressHUDModeAnnularDeterminate;
-
+    });
 }
 - (void)showBarDeterminate:(NSString *)title {
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self setTextStyle:title];
         self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+    });
 }
 - (void)setHUDDeterminateProgress:(float)progress {
-    self.hud.progress = progress;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.hud.progress = progress;
+    });
 }
 
 @end
