@@ -120,10 +120,8 @@
 }
 
 - (void)showLoading:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
         self.hud.mode = MBProgressHUDModeIndeterminate;
         [self setTextStyle:title];
-    });
 }
 - (void)showLoadingSmall:(NSString *)title {
     self.hud.mode = MBProgressHUDModeCustomView;
@@ -189,27 +187,20 @@
 }
 
 - (void)showDeterminate:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
         [self setTextStyle:title];
         self.hud.mode = MBProgressHUDModeDeterminate;
-    });
 }
 - (void)showAnnularDeterminate:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
         [self setTextStyle:title];
         self.hud.mode = MBProgressHUDModeAnnularDeterminate;
-    });
+
 }
 - (void)showBarDeterminate:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
         [self setTextStyle:title];
         self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-    });
 }
 - (void)setHUDDeterminateProgress:(float)progress {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.hud.progress = progress;
-    });
+    self.hud.progress = progress;
 }
 
 @end
