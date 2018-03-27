@@ -46,17 +46,15 @@ If you added `MBHUD` manually, just add a [bridging header](https://developer.ap
 
 (see sample Xcode project in `/Demo`)
 
-`MBHUD` is created as a singleton (i.e. it doesn't need to be explicitly allocated and instantiated; you directly call `[MBHUD method]`).
-
 **Use `MBHUD` wisely! Only use it if you absolutely need to perform a task before taking the user forward. Bad use case examples: pull to refresh, infinite scrolling, sending message.**
 
 Using `MBHUD` in your app will usually look as simple as this (using Grand Central Dispatch):
 ```objective-c
-[MBHUD showLoading:nil onView:nil];
+MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     // time-consuming task
     dispatch_async(dispatch_get_main_queue(), ^{
-        [MBHUD hid];
+        [hud hid];
     });
 });
 ```
@@ -68,47 +66,47 @@ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 /**
  设置 MBProgressHUDBackgroundStyle 为 Blur
  */
-+ (void)setHUDBackgroundStyleBlur;
+- (void)setHUDBackgroundStyleBlur;
 
 /**
  设置 MBBackgroundView 的 color
 
  @param color UIColor
  */
-+ (void)setHUDBackgroundViewColor:(UIColor *)color;
+- (void)setHUDBackgroundViewColor:(UIColor *)color;
 
 /**
  设置 BezelView 的颜色
 
  @param color UIColor
  */
-+ (void)setHUDBezelViewColor:(UIColor *)color;
+- (void)setHUDBezelViewColor:(UIColor *)color;
 
 /**
  设置显示内容的颜色
 
  @param color UIColor
  */
-+ (void)setHUDContentColor:(UIColor *)color;
+- (void)setHUDContentColor:(UIColor *)color;
 
 /**
  设置 HUD 内容边距
 
  @param margin margin
  */
-+ (void)setHUDMargin:(CGFloat)margin;
+- (void)setHUDMargin:(CGFloat)margin;
 
 /**
  设置 HUD 最小尺寸
 
  @param minSize minSize
  */
-+ (void)setHUDMInSize:(CGSize)minSize;
+- (void)setHUDMInSize:(CGSize)minSize;
 
 /**
  让SuperView响应操作，即禁用HUD的 userInteractionEnabled = NO
  */
-+ (void)superViewUserInteractionEnabled;
+- (void)superViewUserInteractionEnabled;
 
 ```
 ## License

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		343961681FE3D55A00B22BFF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 343961671FE3D55900B22BFF /* README.md */; };
 		3465DCCB1F8A209200C4E321 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3465DCCA1F8A209200C4E321 /* AppDelegate.m */; };
 		3465DCCE1F8A209200C4E321 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3465DCCD1F8A209200C4E321 /* ViewController.m */; };
 		3465DCD11F8A209200C4E321 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3465DCCF1F8A209200C4E321 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		1AD2BE61D26D5E7B30E6313E /* Pods_MBHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MBHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		343961671FE3D55900B22BFF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3465DCC61F8A209200C4E321 /* MBHUD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MBHUD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3465DCC91F8A209200C4E321 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3465DCCA1F8A209200C4E321 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 		3465DCBD1F8A209200C4E321 = {
 			isa = PBXGroup;
 			children = (
+				343961671FE3D55900B22BFF /* README.md */,
 				3465DCC81F8A209200C4E321 /* MBHUD */,
 				3465DCC71F8A209200C4E321 /* Products */,
 				A86216D3569569C002158E16 /* Pods */,
@@ -144,7 +147,6 @@
 				3465DCC31F8A209200C4E321 /* Frameworks */,
 				3465DCC41F8A209200C4E321 /* Resources */,
 				D7913E669BE0F145CEEEDB74 /* [CP] Embed Pods Frameworks */,
-				226E1D37263AA4EAF4DCD1CA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -193,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				343961681FE3D55A00B22BFF /* README.md in Resources */,
 				348679531F8B785000E5A224 /* MBHUD.bundle in Resources */,
 				34F229B91F8CCEDF00D1CDEE /* CustomerImage.xcassets in Resources */,
 				3465DCD61F8A209200C4E321 /* LaunchScreen.storyboard in Resources */,
@@ -204,21 +207,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		226E1D37263AA4EAF4DCD1CA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MBHUD/Pods-MBHUD-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		AB3A72553B3B92A88DEE6E06 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -404,7 +392,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y56GXB6A3V;
+				DEVELOPMENT_TEAM = 8Z28V4VGND;
 				INFOPLIST_FILE = MBHUD/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -422,7 +410,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y56GXB6A3V;
+				DEVELOPMENT_TEAM = 8Z28V4VGND;
 				INFOPLIST_FILE = MBHUD/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

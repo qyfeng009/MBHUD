@@ -8,11 +8,10 @@
 
 #import "MBHUD.h"
 #import <MBProgressHUD/MBProgressHUD.h>
-#define MBShare [MBHUD share]
-#define HUD MBShare.hud
 
 @interface MBHUD ()
-@property (nonatomic,strong) MBProgressHUD *hud;
+@property (nonatomic, strong) MBProgressHUD *hud;
+@property (nonatomic, strong) UIView *superView;
 @property (strong, nonatomic) UIImage *circleLoadingImage;
 @property (strong, nonatomic) UIImage *warningImage;
 @property (strong, nonatomic) UIImage *successImage;
@@ -20,15 +19,36 @@
 @end
 
 @implementation MBHUD
-+ (instancetype)share {
-    static MBHUD *hud;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        hud = [[MBHUD alloc] init];
-    });
-    return hud;
+
+- (instancetype)initWithSuperView:(UIView *)view {
+    self = [super init];
+    if (self) {
+        self.superView = view;
+        NSBundle *bundle = [NSBundle bundleForClass:[MBHUD class]];
+        NSURL *url = [bundle URLForResource:@"MBHUD" withExtension:@"bundle"];
+        NSBundle *imageBundle = [NSBundle bundleWithURL:url];
+        
+        UIImage *circleLoadingImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"circle_loading" ofType:@"png"]];
+        UIImage *warningImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"warning" ofType:@"png"]];
+        UIImage *successImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"success" ofType:@"png"]];
+        UIImage *errorImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"error" ofType:@"png"]];
+        
+        self.circleLoadingImage = [circleLoadingImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.warningImage = [warningImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.successImage = [successImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.errorImage = [errorImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        
+        if (!view) {
+            view = [self mainWindow];
+        }
+        self.hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+        [self.hud setRemoveFromSuperViewOnHide:YES];
+        self.hud.animationType = MBProgressHUDAnimationZoom;
+    }
+    return self;
 }
-+ (UIWindow *)mainWindow {
+
+- (UIWindow *)mainWindow {
     UIApplication *app = [UIApplication sharedApplication];
     if ([app.delegate respondsToSelector:@selector(window)]) {
         return [app.delegate window];
@@ -36,133 +56,87 @@
         return [app keyWindow];
     }
 }
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        NSBundle *bundle = [NSBundle bundleForClass:[MBHUD class]];
-        NSURL *url = [bundle URLForResource:@"MBHUD" withExtension:@"bundle"];
-        NSBundle *imageBundle = [NSBundle bundleWithURL:url];
 
-        UIImage *circleLoadingImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"circle_loading" ofType:@"png"]];
-        UIImage *warningImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"warning" ofType:@"png"]];
-        UIImage *successImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"success" ofType:@"png"]];
-        UIImage *errorImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"error" ofType:@"png"]];
-
-        _circleLoadingImage = [circleLoadingImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        _warningImage = [warningImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        _successImage = [successImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        _errorImage = [errorImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-
-    }
-    return self;
+- (void)setHUDBackgroundStyleBlur {
+    self.hud.backgroundView.style = MBProgressHUDBackgroundStyleBlur;
 }
-- (void)showHUDOnView:(UIView *)view {
-    if (!view) {
-        view = [MBHUD mainWindow];
-    }
-    if (!_hud) {
-        self.hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    } else {
-        self.hud = [MBProgressHUD HUDForView:view];
-        self.hud.minSize = self.hud.bezelView.bounds.size;
-    }
-    [self.hud setRemoveFromSuperViewOnHide:YES];
-    self.hud.animationType = MBProgressHUDAnimationZoom;
+- (void)setHUDBackgroundViewColor:(UIColor *)color {
+    self.hud.backgroundView.color = color;
 }
-+ (void)setHUDBackgroundStyleBlur {
-    HUD.backgroundView.style = MBProgressHUDBackgroundStyleBlur;
+- (void)setHUDBezelViewColor:(UIColor *)color {
+    self.hud.bezelView.color = color;
 }
-+ (void)setHUDBackgroundViewColor:(UIColor *)color {
-    HUD.backgroundView.color = color;
+- (void)setHUDContentColor:(UIColor *)color {
+    self.hud.contentColor = color;
 }
-+ (void)setHUDBezelViewColor:(UIColor *)color {
-    HUD.bezelView.color = color;
+- (void)setHUDMargin:(CGFloat)margin {
+    [self.hud setMargin:margin];
 }
-+ (void)setHUDContentColor:(UIColor *)color {
-    HUD.contentColor = color;
-}
-+ (void)setHUDMargin:(CGFloat)margin {
-    [HUD setMargin:margin];
-}
-+ (void)setHUDMInSize:(CGSize)minSize {
-    HUD.minSize = minSize;
+- (void)setHUDMInSize:(CGSize)minSize {
+    self.hud.minSize = minSize;
 }
 
-- (void)setTitleStyle:(NSString *)title {
-    self.hud.detailsLabel.text = title;
-    self.hud.detailsLabel.numberOfLines = 0;
-    if (@available(iOS 8.2, *)) {
-        self.hud.detailsLabel.font = [UIFont systemFontOfSize:13 weight:0.5];
-    } else {
-        self.hud.detailsLabel.font = [UIFont systemFontOfSize:13];
-    }
-    [self.hud setMargin:10];
+- (void)setTextStyle:(NSString *)text {
+    self.hud.label.text = text;
+    self.hud.label.numberOfLines = 0;
 }
-+ (void)showTitle:(NSString *)title onView:(UIView *)view {
-    [MBShare showHUDOnView:view];
-    HUD.mode = MBProgressHUDModeText;
-    [MBShare setTitleStyle:title];
+- (void)showText:(NSString *)text {
+    self.hud.mode = MBProgressHUDModeText;
+    [self setTextStyle:text];
+    [self hideAfterDelay:[self displayDurationForString:text]];
+}
+- (void)showTextInBottom:(NSString *)text {
+    self.hud.mode = MBProgressHUDModeText;
+    [self setTextStyle:text];
+    self.hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+    [self hideAfterDelay:[self displayDurationForString:text]];
+}
+
+- (void)showImage:(UIImage *)img title:(NSString *)title {
+    self.hud.minSize = self.hud.bezelView.bounds.size;
+    if (self.hud.minSize.width == 0) {
+        self.hud.minSize = CGSizeMake(100, 100);
+    }
+    self.hud.mode = MBProgressHUDModeCustomView;
+    [self setTextStyle:title];
+    self.hud.customView = [[UIImageView alloc] initWithImage:img];
     [self hideAfterDelay:[self displayDurationForString:title]];
 }
-
-
-+ (void)showImage:(UIImage *)img title:(NSString *)title onView:(UIView *)view {
-    [MBShare showHUDOnView:view];
-    if (HUD.minSize.width == 0) {
-        HUD.minSize = CGSizeMake(100, 0);
-    }
-    HUD.mode = MBProgressHUDModeCustomView;
-    [MBShare setTitleStyle:title];
-    [HUD setMargin:20];
-    HUD.customView = [[UIImageView alloc] initWithImage:img];
+- (void)showSuccess:(NSString *)title {
+    [self showImage: _successImage title:title];
 }
-+ (void)showSuccess:(NSString *)title onView:(UIView *)view {
-    [self showImage:[MBHUD share].successImage title:title onView:view];
-    [self hideAfterDelay:[self displayDurationForString:title]];
+- (void)showFailed:(NSString *)title {
+    [self showImage: _errorImage title:title];
 }
-+ (void)showError:(NSString *)title onView:(UIView *)view {
-    [self showImage:[MBHUD share].errorImage title:title onView:view];
-    [self hideAfterDelay:[self displayDurationForString:title]];
-}
-+ (void)showWarning:(NSString *)title onView:(UIView *)view {
-    [self showImage:[MBHUD share].warningImage title:title onView:view];
-    [self hideAfterDelay:[self displayDurationForString:title]];
-}
-+ (void)showCustomImage:(UIImage *)img title:(NSString *)title onView:(UIView *)view {
-    [self showImage:img title:title onView:view];
-    [self hideAfterDelay:[self displayDurationForString:title]];
-}
-+ (void)superViewUserInteractionEnabled {
-    HUD.userInteractionEnabled = NO;
+- (void)showWarning:(NSString *)title {
+    [self showImage: _warningImage title:title];
 }
 
-+ (void)showLoading:(NSString *)title onView:(UIView *)view {
-    [MBShare showHUDOnView:view];
-    HUD.mode = MBProgressHUDModeIndeterminate;
-    [MBShare setTitleStyle:title];
-    [HUD setMargin:20];
+- (void)superViewUserInteractionEnabled {
+    self.hud.userInteractionEnabled = NO;
 }
-+ (void)showLoadingSmall:(NSString *)title onView:(UIView *)view {
-    [MBShare showHUDOnView:view];
-    HUD.mode = MBProgressHUDModeCustomView;
-    [MBShare setTitleStyle:title];
-    [HUD setMargin:20];
+
+- (void)showLoading:(NSString *)title {
+    self.hud.mode = MBProgressHUDModeIndeterminate;
+    [self setTextStyle:title];
+}
+- (void)showLoadingSmall:(NSString *)title {
+    self.hud.mode = MBProgressHUDModeCustomView;
+    [self setTextStyle:title];
     [self setHUDBackgroundStyleBlur];
-    HUD.bezelView.backgroundColor = [UIColor clearColor];
-    HUD.backgroundView.backgroundColor = view.backgroundColor;
+    self.hud.bezelView.backgroundColor = [UIColor clearColor];
+    self.hud.backgroundView.backgroundColor = _superView.backgroundColor;
     UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    HUD.customView = activityIndicatorView;
+    self.hud.customView = activityIndicatorView;
     [activityIndicatorView startAnimating];
 }
-+ (void)showLoadingCircle:(NSString *)title onView:(UIView *)view {
-    [MBShare showHUDOnView:view];
-    HUD.mode = MBProgressHUDModeCustomView;
-    [MBShare setTitleStyle:title];
-    [HUD setMargin:20];
-    HUD.customView = [self getCircleLoadingImageView];
+- (void)showLoadingCircle:(NSString *)title {
+    self.hud.mode = MBProgressHUDModeCustomView;
+    [self setTextStyle:title];
+    self.hud.customView = [self getCircleLoadingImageView];
 }
-+ (UIImageView *)getCircleLoadingImageView {
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[MBHUD share].circleLoadingImage];
+- (UIImageView *)getCircleLoadingImageView {
+    UIImageView *imgView = [[UIImageView alloc] initWithImage: _circleLoadingImage];
     CABasicAnimation *animation = [ CABasicAnimation animationWithKeyPath:@"transform"];
     animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DIdentity];
     animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI_2, 0.0, 0.0, 1.0) ];
@@ -173,57 +147,56 @@
     [imgView.layer addAnimation:animation forKey:@"rotate360"];
     return imgView;
 }
-+ (void)showCustomAnimationWithImageArray:(NSArray *)imagArray onView:(UIView *)view {
+- (void)showFrameAnimationWithImageArray:(NSArray *)imagArray {
     UIImageView *showImageView = [[UIImageView alloc] init];
     showImageView.animationImages = imagArray;
     [showImageView setAnimationRepeatCount:0];
     [showImageView setAnimationDuration:(imagArray.count + 1) * 0.072];
     [showImageView startAnimating];
-    [MBShare showHUDOnView:view];
-    HUD.mode = MBProgressHUDModeCustomView;
-    [HUD setMargin:0];
-    HUD.bezelView.color = [UIColor clearColor];
-    HUD.customView = showImageView;
+    
+    self.hud.mode = MBProgressHUDModeCustomView;
+    [_hud setMargin:0];
+    self.hud.bezelView.color = [UIColor clearColor];
+    self.hud.customView = showImageView;
 }
-+ (void)showCustomView:(UIView *)customView onView:(UIView *)view {
-    [MBShare showHUDOnView:view];
-    HUD.mode = MBProgressHUDModeCustomView;
-    HUD.customView = nil;
-    [HUD setMargin:0];
-    HUD.minSize = customView.bounds.size;
-    [HUD.bezelView addSubview: customView];
+- (void)showCustomView:(UIView *)customView {
+    self.hud.mode = MBProgressHUDModeCustomView;
+    self.hud.customView = nil;
+    [self.hud setMargin:0];
+    self.hud.minSize = customView.bounds.size;
+    [self.hud.bezelView addSubview: customView];
 }
 
-+ (void)hide {
-    [HUD hideAnimated:YES];
-    HUD = nil;
-}
-+ (void)hideAfterDelay:(NSTimeInterval)delay {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self hide];
+- (void)hide {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.hud hideAnimated:YES];
+        self.hud = nil;
     });
 }
-+ (NSTimeInterval)displayDurationForString:(NSString*)string {
+- (void)hideAfterDelay:(NSTimeInterval)delay {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.hud hideAnimated:YES afterDelay:delay];
+        self.hud = nil;
+    });
+}
+- (NSTimeInterval)displayDurationForString:(NSString*)string {
     return MAX((CGFloat)string.length * 0.06 + 0.5, 2.0f);
 }
 
-+ (void)showDeterminate:(NSString *)title onView:(UIView *)view {
-    [MBShare showHUDOnView:view];
-    [MBShare setTitleStyle:title];
-    [HUD setMargin:20];
-    HUD.mode = MBProgressHUDModeDeterminate;
+- (void)showDeterminate:(NSString *)title {
+    [self setTextStyle:title];
+    self.hud.mode = MBProgressHUDModeDeterminate;
 }
-+ (void)showAnnularDeterminate:(NSString *)title onView:(UIView *)view {
-    [self showDeterminate:title onView:view];
-    HUD.mode = MBProgressHUDModeAnnularDeterminate;
+- (void)showAnnularDeterminate:(NSString *)title {
+    [self setTextStyle:title];
+    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
 }
-+ (void)showDeterminateHorizontalBar:(NSString *)title onView:(UIView *)view {
-    [self showDeterminate:title onView:view];
-    HUD.mode = MBProgressHUDModeDeterminateHorizontalBar;
+- (void)showBarDeterminate:(NSString *)title {
+    [self setTextStyle:title];
+    self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
 }
-
-+ (void)setHUDDeterminateProgress:(float)progress {
-    HUD.progress = progress;
+- (void)setHUDDeterminateProgress:(float)progress {
+    self.hud.progress = progress;
 }
 
 @end
