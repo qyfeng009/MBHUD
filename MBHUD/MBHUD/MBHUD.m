@@ -80,36 +80,31 @@
 }
 
 - (void)setTextStyle:(NSString *)text {
+    [self.hud setMargin:13];
     self.hud.label.text = text;
     self.hud.label.numberOfLines = 0;
 }
 - (void)showText:(NSString *)text {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.hud.mode = MBProgressHUDModeText;
-        [self setTextStyle:text];
-        [self hideAfterDelay:[self displayDurationForString:text]];
-    });
+    self.hud.mode = MBProgressHUDModeText;
+    [self setTextStyle:text];
+    [self hideAfterDelay:[self displayDurationForString:text]];
 }
 - (void)showTextInBottom:(NSString *)text {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.hud.mode = MBProgressHUDModeText;
-        [self setTextStyle:text];
-        self.hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
-        [self hideAfterDelay:[self displayDurationForString:text]];
-    });
+    self.hud.mode = MBProgressHUDModeText;
+    [self setTextStyle:text];
+    self.hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+    [self hideAfterDelay:[self displayDurationForString:text]];
 }
 
 - (void)showImage:(UIImage *)img title:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.hud.minSize = _hud.bezelView.bounds.size;
-        if (_hud.minSize.width == 77) {
-            self.hud.minSize = CGSizeMake(100, 100);
-        }
-        self.hud.mode = MBProgressHUDModeCustomView;
-        [self setTextStyle:title];
-        self.hud.customView = [[UIImageView alloc] initWithImage:img];
-        [self hideAfterDelay:[self displayDurationForString:title]];
-    });
+    self.hud.minSize = _hud.bezelView.bounds.size;
+    if (_hud.minSize.width == 0) {
+        self.hud.minSize = CGSizeMake(110, 100);
+    }
+    [self setTextStyle:title];
+    self.hud.mode = MBProgressHUDModeCustomView;
+    self.hud.customView = [[UIImageView alloc] initWithImage:img];
+    [self hideAfterDelay:[self displayDurationForString:title]];
 }
 - (void)showSuccess:(NSString *)title {
     [self showImage: _successImage title:title];
@@ -122,29 +117,25 @@
 }
 
 - (void)showLoading:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.hud.mode = MBProgressHUDModeIndeterminate;
-        [self setTextStyle:title];
-    });
+    self.hud.mode = MBProgressHUDModeIndeterminate;
+    self.hud.minSize = CGSizeMake(110, 100);
+    [self setTextStyle:title];
 }
 - (void)showLoadingSmall:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.hud.mode = MBProgressHUDModeCustomView;
-        [self setTextStyle:title];
-        [self setHUDBackgroundStyleBlur];
-        self.hud.bezelView.backgroundColor = [UIColor clearColor];
-        self.hud.backgroundView.backgroundColor = _superView.backgroundColor;
-        UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-        self.hud.customView = activityIndicatorView;
-        [activityIndicatorView startAnimating];
-    });
+    self.hud.mode = MBProgressHUDModeCustomView;
+    [self setTextStyle:title];
+    [self setHUDBackgroundStyleBlur];
+    self.hud.bezelView.backgroundColor = [UIColor clearColor];
+    self.hud.backgroundView.backgroundColor = _superView.backgroundColor;
+    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.hud.customView = activityIndicatorView;
+    [activityIndicatorView startAnimating];
 }
 - (void)showLoadingCircle:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.hud.mode = MBProgressHUDModeCustomView;
-        [self setTextStyle:title];
-        self.hud.customView = [self getCircleLoadingImageView];
-    });
+    self.hud.mode = MBProgressHUDModeCustomView;
+    self.hud.minSize = CGSizeMake(110, 100);
+    [self setTextStyle:title];
+    self.hud.customView = [self getCircleLoadingImageView];
 }
 - (UIImageView *)getCircleLoadingImageView {
     UIImageView *imgView = [[UIImageView alloc] initWithImage: _circleLoadingImage];
@@ -164,61 +155,49 @@
     [showImageView setAnimationRepeatCount:0];
     [showImageView setAnimationDuration:(imagArray.count + 1) * 0.072];
     [showImageView startAnimating];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.hud.mode = MBProgressHUDModeCustomView;
-        [_hud setMargin:0];
-        self.hud.bezelView.color = [UIColor clearColor];
-        self.hud.customView = showImageView;
-    });
+
+    self.hud.mode = MBProgressHUDModeCustomView;
+    [_hud setMargin:0];
+    self.hud.bezelView.color = [UIColor clearColor];
+    self.hud.customView = showImageView;
 }
 - (void)showCustomView:(UIView *)customView {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.hud.mode = MBProgressHUDModeCustomView;
-        self.hud.customView = nil;
-        [self.hud setMargin:0];
-        self.hud.minSize = customView.bounds.size;
-        [self.hud.bezelView addSubview: customView];
-    });
+    self.hud.mode = MBProgressHUDModeCustomView;
+    self.hud.customView = nil;
+    [self.hud setMargin:0];
+    self.hud.minSize = customView.bounds.size;
+    [self.hud.bezelView addSubview: customView];
 }
 
 - (void)hide {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.hud hideAnimated:YES];
-        self.hud = nil;
-    });
+    [self.hud hideAnimated:YES];
+    self.hud = nil;
 }
 - (void)hideAfterDelay:(NSTimeInterval)delay {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.hud hideAnimated:YES afterDelay:delay];
-        self.hud = nil;
-    });
+    [self.hud hideAnimated:YES afterDelay:delay];
+    self.hud = nil;
 }
 - (NSTimeInterval)displayDurationForString:(NSString*)string {
     return MAX((CGFloat)string.length * 0.06 + 0.5, 2.0f);
 }
 
 - (void)showDeterminate:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self setTextStyle:title];
-        self.hud.mode = MBProgressHUDModeDeterminate;
-    });
+    [self setTextStyle:title];
+    self.hud.minSize = CGSizeMake(110, 100);
+    self.hud.mode = MBProgressHUDModeDeterminate;
 }
 - (void)showAnnularDeterminate:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self setTextStyle:title];
-        self.hud.mode = MBProgressHUDModeAnnularDeterminate;
-    });
+    [self setTextStyle:title];
+    self.hud.minSize = CGSizeMake(110, 100);
+    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
 }
 - (void)showBarDeterminate:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self setTextStyle:title];
-        self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-    });
+    [self setTextStyle:title];
+    self.hud.minSize = CGSizeMake(110, 100);
+    self.hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
 }
 - (void)setHUDDeterminateProgress:(float)progress {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.hud.progress = progress;
-    });
+    self.hud.progress = progress;
 }
 
 @end

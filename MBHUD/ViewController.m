@@ -96,7 +96,7 @@
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         sleep(3.);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [hud showSuccess:@"success"];
+            [hud showFailed:@"failed..."];
         });
     });
 }
