@@ -100,9 +100,7 @@
 }
 
 - (void)showImage:(UIImage *)img title:(NSString *)title {
-    //    dispatch_async(dispatch_get_main_queue(), ^{
     self.hud.minSize = self.hud.bezelView.bounds.size;
-    NSLog(@"%@", NSStringFromCGSize(self.hud.minSize));
     if (self.hud.minSize.width == 0) {
         self.hud.minSize = CGSizeMake(100, 100);
     }
@@ -110,7 +108,6 @@
     [self setTextStyle:title];
     self.hud.customView = [[UIImageView alloc] initWithImage:img];
     [self hideAfterDelay:[self displayDurationForString:title]];
-    //    });
 }
 - (void)showSuccess:(NSString *)title {
     [self showImage: _successImage title:title];
@@ -139,7 +136,6 @@
     [activityIndicatorView startAnimating];
 }
 - (void)showLoadingCircle:(NSString *)title {
-
     self.hud.mode = MBProgressHUDModeCustomView;
     [self setTextStyle:title];
     self.hud.customView = [self getCircleLoadingImageView];
@@ -162,7 +158,7 @@
     [showImageView setAnimationRepeatCount:0];
     [showImageView setAnimationDuration:(imagArray.count + 1) * 0.072];
     [showImageView startAnimating];
-
+    
     self.hud.mode = MBProgressHUDModeCustomView;
     [_hud setMargin:0];
     self.hud.bezelView.color = [UIColor clearColor];
