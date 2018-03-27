@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 #
 
 s.name         = "MBHUD"
-s.version      = "0.0.5"
+s.version      = "0.0.6"
 s.summary      = "站在巨人的肩上，MBProgressHUD 简单封装"
 
 # This description is used to generate tags and improve search results.
@@ -65,7 +65,7 @@ s.author             = { "qyfeng" => "qyfeng009@163.com" }
 #
 
 # s.platform     = :ios
-# s.platform     = :ios, "8.0"
+s.platform     = :ios, "8.0"
 
 #  When using multiple platforms
 s.ios.deployment_target = "8.0"
@@ -94,7 +94,7 @@ s.source       = { :git => "https://github.com/qyfeng009/MBHUD.git", :tag => "#{
 s.source_files  = "MBHUD/**/MBHUD.{h,m}"
 # s.exclude_files = "Classes/Exclude"
 
-# s.public_header_files = "Classes/**/*.h"
+s.public_header_files = "MBHUD/**/*.h"
 
 
 # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
