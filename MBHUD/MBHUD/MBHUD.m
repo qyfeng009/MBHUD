@@ -102,7 +102,7 @@
         self.hud.minSize = CGSizeMake(110, 100);
     }
     [self setTextStyle:title];
-    self.hud.mode = MBProgressHUDModeCustomView;
+    _hud.mode = MBProgressHUDModeCustomView;
     self.hud.customView = [[UIImageView alloc] initWithImage:img];
     [self hideAfterDelay:[self displayDurationForString:title]];
 }
@@ -133,7 +133,7 @@
 }
 - (void)showLoadingCircle:(NSString *)title {
     self.hud.mode = MBProgressHUDModeCustomView;
-    self.hud.minSize = CGSizeMake(110, 100);
+    _hud.minSize = CGSizeMake(110, 100);
     [self setTextStyle:title];
     self.hud.customView = [self getCircleLoadingImageView];
 }
