@@ -75,6 +75,9 @@
 - (void)setHUDMInSize:(CGSize)minSize {
     self.hud.minSize = minSize;
 }
+- (void)setSuperViewUserInteractionEnabled {
+    self.hud.userInteractionEnabled = NO;
+}
 
 - (void)setTextStyle:(NSString *)text {
     self.hud.label.text = text;
@@ -97,8 +100,9 @@
 }
 
 - (void)showImage:(UIImage *)img title:(NSString *)title {
-    dispatch_async(dispatch_get_main_queue(), ^{
+//    dispatch_async(dispatch_get_main_queue(), ^{
         self.hud.minSize = self.hud.bezelView.bounds.size;
+        NSLog(@"%@", NSStringFromCGSize(self.hud.minSize));
         if (self.hud.minSize.width == 0) {
             self.hud.minSize = CGSizeMake(100, 100);
         }
@@ -106,7 +110,7 @@
         [self setTextStyle:title];
         self.hud.customView = [[UIImageView alloc] initWithImage:img];
         [self hideAfterDelay:[self displayDurationForString:title]];
-    });
+//    });
 }
 - (void)showSuccess:(NSString *)title {
     [self showImage: _successImage title:title];
@@ -116,12 +120,6 @@
 }
 - (void)showWarning:(NSString *)title {
     [self showImage: _warningImage title:title];
-}
-
-- (void)superViewUserInteractionEnabled {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.hud.userInteractionEnabled = NO;
-    });
 }
 
 - (void)showLoading:(NSString *)title {
@@ -168,7 +166,7 @@
         [showImageView setAnimationRepeatCount:0];
         [showImageView setAnimationDuration:(imagArray.count + 1) * 0.072];
         [showImageView startAnimating];
-        
+
         self.hud.mode = MBProgressHUDModeCustomView;
         [_hud setMargin:0];
         self.hud.bezelView.color = [UIColor clearColor];

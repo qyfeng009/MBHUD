@@ -65,7 +65,7 @@
 /**
  让SuperView响应操作，即禁用HUD的 userInteractionEnabled = NO
  */
-- (void)superViewUserInteractionEnabled;
+- (void)setSuperViewUserInteractionEnabled;
 
 
 /**

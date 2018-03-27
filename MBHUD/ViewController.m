@@ -66,11 +66,9 @@
       ];
 }
 - (void)showTextInMiddle {
-    
     MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
     [hud showText:@"欲买桂花同载酒，终不似，少年游。"];
-    [hud superViewUserInteractionEnabled];
-    [hud setHUDContentColor:[UIColor redColor]];
+    [hud setSuperViewUserInteractionEnabled];
 }
 - (void)showTextInBottom {
     MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
