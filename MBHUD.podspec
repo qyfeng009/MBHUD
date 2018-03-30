@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 #
 
 s.name         = "MBHUD"
-s.version      = "0.0.9"
+s.version      = "0.1"
 s.summary      = "站在巨人的肩上，MBProgressHUD 简单封装"
 
 # This description is used to generate tags and improve search results.

@@ -57,6 +57,7 @@
       @[[MBExample exampleWithTitle:@"show loading" selector:@selector(showLoading)],
         [MBExample exampleWithTitle:@"show loading small" selector:@selector(showLoadingSmall)],
         [MBExample exampleWithTitle:@"show loading circle" selector:@selector(showLoadingCircle)],
+        [MBExample exampleWithTitle:@"show loading ChaseR" selector:@selector(showLoadingChaseR)],
         [MBExample exampleWithTitle:@"show loading frameAmimation" selector:@selector(showLoadingFrameAmimation)],
         [MBExample exampleWithTitle:@"show custom view" selector:@selector(showCustomView)]],
 
@@ -68,11 +69,12 @@
 - (void)showTextInMiddle {
     MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
     [hud showText:@"欲买桂花同载酒，终不似，少年游。"];
-    [hud setSuperViewUserInteractionEnabled];
+    [hud setSuperViewEnabled];
 }
 - (void)showTextInBottom {
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.navigationController.tabBarController.view];
     [hud showTextInBottom:@"杨柳依依"];
+
 }
 - (void)showSuccess {
     MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
@@ -85,6 +87,7 @@
 - (void)showWarning {
     MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
     [hud showWarning:@"warning"];
+    [hud setDarkStyle];
 }
 - (void)showCustomImage {
     MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
@@ -120,10 +123,24 @@
         });
     });
 }
+- (void)showLoadingChaseR {
+    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    [hud showLoadingChaseR:nil];
+    [hud setMBBackgroundStyleBlur];
+    [hud setBezelViewStyleSolidColor];
+    [hud setBezelViewColor:[UIColor clearColor]];
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        sleep(3.);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [hud hide];
+        });
+    });
+
+}
 - (void)showLoadingFrameAmimation {
     MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
     [hud showFrameAnimationWithImageArray:[self getRandomImgArry]];
-    [hud setHUDBackgroundViewColor:[UIColor colorWithWhite:0.f alpha:0.3f]];
+    [hud setMBBackgroundViewColor:[UIColor colorWithWhite:0.f alpha:0.3f]];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [hud hide];
     });
@@ -199,7 +216,7 @@
 
 
 - (void)increaseProgressForHUD:(MBHUD *)hud {
-    
+
     pro += 0.05f;
     [hud setHUDDeterminateProgress:pro];
 

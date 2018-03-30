@@ -5,9 +5,10 @@
 //  Created by 009 on 2017/10/9.
 //  Copyright © 2017年 qyfeng. All rights reserved.
 //
-// 注： 作者在背景图框上加了一层毛玻璃 UIVisualEffectView，如果不需要毛玻璃效果 在MBProgressHUD.m的 1164左右行，注释掉就好了
-// 当 onView 的参数是 nil ，则添加到 window 上。
-// 但是当当前的 ViewController 是 mainWindow 的 rootViewController 时， 在viewDidLoad 方法不能是 nil , 因为当前的 ViewController 还没添加到window上，他会把 MBHUD 盖住
+/*
+ 注：当 onView 的参数是 nil ，则添加到 window 上。
+ 但是当当前的 ViewController 是 mainWindow 的 rootViewController 时， 在viewDidLoad 方法不能是 nil , 因为当前的 ViewController 还没添加到window上，他会把 MBHUD 盖住
+ */
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
@@ -15,7 +16,7 @@
 @interface MBHUD : NSObject
 
 /**
- 初始化方法
+ 初始化方法, 创建显示 MBHUD
 
  @param view superView 添加 HUD 的View，为 nil 则添加到 window 上
  @return return value description
@@ -23,53 +24,62 @@
 - (instancetype)initWithSuperView:(UIView *)view;
 
 /**
- 设置 MBProgressHUDBackgroundStyle 为 Blur
+ 为 backgroundView 添加模糊效果, 默认值 MBProgressHUDBackgroundStyleSolidColor，
  */
-- (void)setHUDBackgroundStyleBlur;
+- (void)setMBBackgroundStyleBlur;
 
 /**
- 设置 MBBackgroundView 的 color
+ 为 backgroundView 设置颜色。需要模糊效果需需调用 setMBBackgroundStyleBlur
 
  @param color UIColor
  */
-- (void)setHUDBackgroundViewColor:(UIColor *)color;
+- (void)setMBBackgroundViewColor:(UIColor *)color;
 
 /**
- 设置 BezelView 的颜色
+ 为 bezelView 去掉模糊效果, 默认值 MBProgressHUDBackgroundStyleBlur
+ */
+- (void)setBezelViewStyleSolidColor;
+
+/**
+ 为 bezelView 设置颜色，默认自带模糊效果，不需要需调用 setBezelViewStyleSolidColor
 
  @param color UIColor
  */
-- (void)setHUDBezelViewColor:(UIColor *)color;
+- (void)setBezelViewColor:(UIColor *)color;
 
 /**
  设置显示内容的颜色
 
  @param color UIColor
  */
-- (void)setHUDContentColor:(UIColor *)color;
+- (void)setContentColor:(UIColor *)color;
 
 /**
  设置 HUD 内容边距
 
  @param margin margin
  */
-- (void)setHUDMargin:(CGFloat)margin;
+- (void)setMargin:(CGFloat)margin;
 
 /**
  设置 HUD 最小尺寸
 
  @param minSize minSize
  */
-- (void)setHUDMInSize:(CGSize)minSize;
+- (void)setMInSize:(CGSize)minSize;
 
 /**
  让SuperView响应操作，即禁用HUD的 userInteractionEnabled = NO
  */
-- (void)setSuperViewUserInteractionEnabled;
-
+- (void)setSuperViewEnabled;
 
 /**
- 显示文字，自动消失
+ 设置为 dark 显示样式
+ */
+- (void)setDarkStyle;
+
+/**
+ 显示文字在屏幕中间，自动消失
 
  @param text title
  */
@@ -130,7 +140,12 @@
  @param title title
  */
 - (void)showLoadingCircle:(NSString *)title;
+/**
+ 显示 预设的旋转等待动画，需手动消失
 
+ @param title title
+ */
+- (void)showLoadingChaseR:(NSString *)title;
 
 /**
  显示 自定义的 帧动画，需手动消失
@@ -179,4 +194,6 @@
  @param progress 进度值
  */
 - (void)setHUDDeterminateProgress:(float)progress;
+
 @end
+
