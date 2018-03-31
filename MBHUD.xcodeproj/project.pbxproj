@@ -35,9 +35,6 @@
 		3465DCD51F8A209200C4E321 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3465DCD71F8A209200C4E321 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3465DCD81F8A209200C4E321 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		34784B41206F2B9D0063C725 /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MBProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		34784B42206F2BAA0063C725 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		34784B44206F2BC30063C725 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3486794F1F8B06AC00E5A224 /* MBHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBHUD.h; sourceTree = "<group>"; };
 		348679501F8B06AC00E5A224 /* MBHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBHUD.m; sourceTree = "<group>"; };
 		348679521F8B785000E5A224 /* MBHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBHUD.bundle; sourceTree = "<group>"; };
@@ -124,9 +121,6 @@
 		A74B5DADB8E4D74CB6CDDC2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				34784B44206F2BC30063C725 /* Foundation.framework */,
-				34784B42206F2BAA0063C725 /* UIKit.framework */,
-				34784B41206F2B9D0063C725 /* MBProgressHUD.framework */,
 				1AD2BE61D26D5E7B30E6313E /* Pods_MBHUD.framework */,
 			);
 			name = Frameworks;

@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 #
 
 s.name         = "MBHUD"
-s.version      = "0.1.2"
+s.version      = "0.0.8"
 s.summary      = "站在巨人的肩上，MBProgressHUD 简单封装"
 
 # This description is used to generate tags and improve search results.
@@ -68,7 +68,7 @@ s.author             = { "qyfeng" => "qyfeng009@163.com" }
 s.platform     = :ios, "8.0"
 
 #  When using multiple platforms
-s.ios.deployment_target = "8.0"
+# s.ios.deployment_target = "8.0"
 # s.osx.deployment_target = "10.7"
 # s.watchos.deployment_target = "2.0"
 # s.tvos.deployment_target = "9.0"
