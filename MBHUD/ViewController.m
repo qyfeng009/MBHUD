@@ -69,7 +69,6 @@
 - (void)showTextInMiddle {
     MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
     [hud showText:@"欲买桂花同载酒，终不似，少年游。"];
-    [hud setSuperViewEnabled];
 }
 - (void)showTextInBottom {
     MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.navigationController.tabBarController.view];

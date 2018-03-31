@@ -94,9 +94,8 @@
 }
 
 - (void)setTextStyle:(NSString *)text {
-    self.hud.detailsLabel.text = text;
-    self.hud.detailsLabel.numberOfLines = 0;
-    [self setMargin:13];
+    self.hud.label.text = text;
+    self.hud.label.numberOfLines = 0;
 }
 - (void)showText:(NSString *)text {
     self.hud.mode = MBProgressHUDModeText;
@@ -196,7 +195,7 @@
     });
 }
 - (NSTimeInterval)displayDurationForString:(NSString*)string {
-    return MAX((CGFloat)string.length * 0.06 + 0.5, 2.0f);
+    return MAX((CGFloat)string.length * 0.10 + 0.5, 2.0f);
 }
 
 - (void)showDeterminate:(NSString *)title {
