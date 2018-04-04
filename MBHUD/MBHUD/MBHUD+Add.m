@@ -26,6 +26,14 @@
     MBHUD *HUD = [MBHUD showHUDToView:view];
     return HUD;
 }
+
++ (void)showText:(NSString *)text onView:(UIView *)view {
+    [self creatHUDToView:view].showText(text);
+}
++ (void)showTextInBottom:(NSString *)text onView:(UIView *)view {
+    [self creatHUDToView:view].showTextInBottom(text);
+}
+
 + (void)showSuccess:(NSString *)title onView:(UIView *)view {
     [self creatHUDToView:view].showSuccess(title);
 }

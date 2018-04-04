@@ -9,6 +9,8 @@
 #import "MBHUD.h"
 
 @interface MBHUD (Add)
++ (void)showText:(NSString *)text onView:(UIView *)view;
++ (void)showTextInBottom:(NSString *)text onView:(UIView *)view;
 
 + (void)showSuccess:(NSString *)title onView:(UIView *)view;
 + (void)showFailed:(NSString *)title onView:(UIView *)view;
