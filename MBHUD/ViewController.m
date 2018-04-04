@@ -68,14 +68,10 @@
         [MBExample exampleWithTitle:@"show bar determinate mode" selector:@selector(barDeterminateExample)],
         [MBExample exampleWithTitle:@"show determinate mode" selector:@selector(determinateExample)]]
       ];
+
 }
 - (void)showTextInMiddle {
-//    MBHUD *hud = [MBHUD showHUDToView:self.view];
-//    [hud showText:@"欲买桂花同载酒，终不似，少年游。"];
-    [MBHUD showLoadingChaseR:nil onView:nil];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [MBHUD showFailed:nil onView:nil];
-    });
+    [MBHUD showHUDToView:self.view].setEnabled().showText(@"欲买桂花同载酒，终不似，少年游。");
 }
 - (void)showTextInBottom {
     MBHUD *hud = [MBHUD showHUDToView:self.navigationController.tabBarController.view];

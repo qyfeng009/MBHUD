@@ -13,7 +13,7 @@
 
 ## Installation
 
-### From CocoaPods
+### From CocoaPodsv
 
 [CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like `MBHUD` in your projects. First, add the following line to your [Podfile](http://guides.cocoapods.org/using/using-cocoapods.html):
 
@@ -50,12 +50,22 @@ If you added `MBHUD` manually, just add a [bridging header](https://developer.ap
 
 Using `MBHUD` in your app will usually look as simple as this (using Grand Central Dispatch):
 ```objective-c
-MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+a. general
+MBHUD *hud = [MBHUD showHUDToView:self.view];
 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     // time-consuming task
     dispatch_async(dispatch_get_main_queue(), ^{
         [hud hid];
     });
+});
+
+b. chain 
+[MBHUD showHUDToView:self.view].setDark().showSuccess(@"success");
+
+c. class
+[MBHUD showLoadingChaseR:nil onView:nil];
+dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [MBHUD showFailed:nil onView:nil];
 });
 ```
 ## Customization

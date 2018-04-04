@@ -52,7 +52,7 @@
     return self;
 }
 
-+ (MBHUD *)showHUDToView:(UIView *)view {
++ (instancetype)showHUDToView:(UIView *)view {
     if (!view) {
         if ([self mainWindow]) {
             view = [self mainWindow];

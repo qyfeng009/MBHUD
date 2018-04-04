@@ -21,7 +21,7 @@
  @param view superView 添加 HUD 的View
  @return MBHUD
  */
-+ (MBHUD *)showHUDToView:(UIView *)view;
++ (instancetype)showHUDToView:(UIView *)view;
 
 /**
  为 backgroundView 添加模糊效果, 默认值 MBProgressHUDBackgroundStyleSolidColor，
