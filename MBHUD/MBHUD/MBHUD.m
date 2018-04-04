@@ -9,9 +9,14 @@
 #import "MBHUD.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
+#ifdef DEBUG
+#define NSLog(FORMAT, ...) printf("%s - [Line %d]\n", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String], __LINE__)
+#else
+#define NSLog(...)
+#endif
+
 @interface MBHUD ()
 @property (nonatomic, strong) MBProgressHUD *hud;
-@property (nonatomic, strong) UIView *superView;
 @property (strong, nonatomic) UIImage *circleLoadingImage;
 @property (strong, nonatomic) UIImage *chaseRLoadingImage;
 @property (strong, nonatomic) UIImage *warningImage;
@@ -24,7 +29,6 @@
 - (instancetype)initWithSuperView:(UIView *)view {
     self = [super init];
     if (self) {
-        self.superView = view;
         NSBundle *bundle = [NSBundle bundleForClass:[MBHUD class]];
         NSURL *url = [bundle URLForResource:@"MBHUD" withExtension:@"bundle"];
         NSBundle *imageBundle = [NSBundle bundleWithURL:url];
@@ -41,9 +45,6 @@
         self.errorImage = [errorImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         self.chaseRLoadingImage = [chaseRLoadingImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
-        if (!view) {
-            view = [self mainWindow];
-        }
         self.hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
         [self.hud setRemoveFromSuperViewOnHide:YES];
         self.hud.animationType = MBProgressHUDAnimationZoom;
@@ -51,7 +52,18 @@
     return self;
 }
 
-- (UIWindow *)mainWindow {
++ (MBHUD *)showHUDToView:(UIView *)view {
+    if (!view) {
+        if ([self mainWindow]) {
+            view = [self mainWindow];
+        } else {
+            NSLog(@"当前 window = nil，无法创建 MNHUD");
+            return nil;
+        }
+    }
+    return [[MBHUD alloc] initWithSuperView:view];
+}
++ (UIWindow *)mainWindow {
     UIApplication *app = [UIApplication sharedApplication];
     if ([app.delegate respondsToSelector:@selector(window)]) {
         return [app.delegate window];
@@ -104,8 +116,8 @@
 }
 - (void)showTextInBottom:(NSString *)text {
     self.hud.mode = MBProgressHUDModeText;
-    [self setTextStyle:text];
     self.hud.offset = CGPointMake(0.f, MBProgressMaxOffset);
+    [self setTextStyle:text];
     [self hideAfterDelay:[self displayDurationForString:text]];
 }
 

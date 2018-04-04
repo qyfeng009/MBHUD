@@ -10,6 +10,9 @@
 #import "MBHUD.h"
 #import "QAnimationSuccess.h"
 #import "QAnimationBallClipRotate.h"
+#import "MBHUD+Add.h"
+#import "MBHUD+Chain.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface MBExample : NSObject
 
@@ -67,33 +70,36 @@
       ];
 }
 - (void)showTextInMiddle {
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
-    [hud showText:@"欲买桂花同载酒，终不似，少年游。"];
+//    MBHUD *hud = [MBHUD showHUDToView:self.view];
+//    [hud showText:@"欲买桂花同载酒，终不似，少年游。"];
+    [MBHUD showLoadingChaseR:nil onView:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [MBHUD showFailed:nil onView:nil];
+    });
 }
 - (void)showTextInBottom {
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.navigationController.tabBarController.view];
+    MBHUD *hud = [MBHUD showHUDToView:self.navigationController.tabBarController.view];
     [hud showTextInBottom:@"杨柳依依"];
-
 }
 - (void)showSuccess {
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    MBHUD *hud = [MBHUD showHUDToView:self.view];
     [hud showSuccess:@"success"];
 }
 - (void)showFailed {
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    MBHUD *hud = [MBHUD showHUDToView:self.view];
     [hud showFailed:@"failed"];
 }
 - (void)showWarning {
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    MBHUD *hud = [MBHUD showHUDToView:self.view];
     [hud showWarning:@"warning"];
     [hud setDarkStyle];
 }
 - (void)showCustomImage {
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    MBHUD *hud = [MBHUD showHUDToView:self.view];
     [hud showImage:[UIImage imageNamed:@"loading_6_1"] title:@"bored daze"];
 }
 - (void)showLoading {
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    MBHUD *hud = [MBHUD showHUDToView:self.view];
     [hud showLoading:@"Loading..."];
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         sleep(3.);
@@ -103,7 +109,7 @@
     });
 }
 - (void)showLoadingSmall {
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    MBHUD *hud = [MBHUD showHUDToView:self.view];
     [hud showLoadingSmall:@""];
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         sleep(3.);
@@ -113,7 +119,7 @@
     });
 }
 - (void)showLoadingCircle {
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    MBHUD *hud = [MBHUD showHUDToView:self.view];
     [hud showLoadingCircle:@"loading..."];
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         sleep(3.);
@@ -123,7 +129,7 @@
     });
 }
 - (void)showLoadingChaseR {
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    MBHUD *hud = [MBHUD showHUDToView:self.view];
     [hud showLoadingChaseR:nil];
     [hud setMBBackgroundStyleBlur];
     [hud setBezelViewStyleSolidColor];
@@ -137,7 +143,7 @@
 
 }
 - (void)showLoadingFrameAmimation {
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    MBHUD *hud = [MBHUD showHUDToView:self.view];
     [hud showFrameAnimationWithImageArray:[self getRandomImgArry]];
     [hud setMBBackgroundViewColor:[UIColor colorWithWhite:0.f alpha:0.3f]];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -145,7 +151,7 @@
     });
 }
 - (void)showCustomView {
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    MBHUD *hud = [MBHUD showHUDToView:self.view];
     QAnimationBallClipRotate *ballClipRotate = [[QAnimationBallClipRotate alloc] initWithFrame:CGRectMake(0, 0, 88, 88)];
     QAnimationSuccess *animationSucces = [[QAnimationSuccess alloc] initWithFrame:CGRectMake(0, 0, 88, 88)];
     animationSucces.animationType = QAnimationTypeSuccess;
@@ -160,19 +166,19 @@
 }
 - (void)annularDeterminateExample {
     pro = 0.0f;
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    MBHUD *hud = [MBHUD showHUDToView:self.view];
     [hud showAnnularDeterminate:@"loading..."];
     [self performSelector:@selector(increaseProgressForHUD:) withObject:hud afterDelay:0.1f];
 }
 - (void)barDeterminateExample {
     pro = 0.0f;
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    MBHUD *hud = [MBHUD showHUDToView:self.view];
     [hud showBarDeterminate:@"loading..."];
     [self performSelector:@selector(increaseProgressForHUD:) withObject:hud afterDelay:0.1f];
 }
 - (void)determinateExample {
     pro = 0.0f;
-    MBHUD *hud = [[MBHUD alloc] initWithSuperView:self.view];
+    MBHUD *hud = [MBHUD showHUDToView:self.view];
     [hud showDeterminate:@"loading"];
     [self performSelector:@selector(increaseProgressForHUD:) withObject:hud afterDelay:0.1f];
 }

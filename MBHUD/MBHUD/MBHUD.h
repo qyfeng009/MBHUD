@@ -16,12 +16,12 @@
 @interface MBHUD : NSObject
 
 /**
- 初始化方法, 创建显示 MBHUD
+ 创建显示 MBHUD
 
- @param view superView 添加 HUD 的View，为 nil 则添加到 window 上
- @return return value description
+ @param view superView 添加 HUD 的View
+ @return MBHUD
  */
-- (instancetype)initWithSuperView:(UIView *)view;
++ (MBHUD *)showHUDToView:(UIView *)view;
 
 /**
  为 backgroundView 添加模糊效果, 默认值 MBProgressHUDBackgroundStyleSolidColor，
@@ -194,6 +194,13 @@
  @param progress 进度值
  */
 - (void)setHUDDeterminateProgress:(float)progress;
+
+/**
+ 当前显示的 window
+
+ @return window
+ */
++ (UIWindow *)mainWindow;
 
 @end
 
