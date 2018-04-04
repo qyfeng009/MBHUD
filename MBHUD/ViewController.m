@@ -7,12 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "MBHUD.h"
 #import "QAnimationSuccess.h"
 #import "QAnimationBallClipRotate.h"
-#import "MBHUD+Add.h"
-#import "MBHUD+Chain.h"
-#import <MBProgressHUD/MBProgressHUD.h>
+#import "MBHUDHeader.h"
 
 @interface MBExample : NSObject
 

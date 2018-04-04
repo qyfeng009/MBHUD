@@ -41,6 +41,7 @@
 		3465DCD51F8A209200C4E321 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3465DCD71F8A209200C4E321 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3465DCD81F8A209200C4E321 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		34806E2120749D4000CD2E07 /* MBHUDHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBHUDHeader.h; sourceTree = "<group>"; };
 		3486794F1F8B06AC00E5A224 /* MBHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBHUD.h; sourceTree = "<group>"; };
 		348679501F8B06AC00E5A224 /* MBHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBHUD.m; sourceTree = "<group>"; };
 		348679521F8B785000E5A224 /* MBHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBHUD.bundle; sourceTree = "<group>"; };
@@ -113,6 +114,7 @@
 				344C5A2D20735A3C008C81C3 /* MBHUD+Add.h */,
 				344C5A2E20735A3C008C81C3 /* MBHUD+Add.m */,
 				348679521F8B785000E5A224 /* MBHUD.bundle */,
+				34806E2120749D4000CD2E07 /* MBHUDHeader.h */,
 			);
 			path = MBHUD;
 			sourceTree = "<group>";

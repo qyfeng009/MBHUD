@@ -91,7 +91,7 @@ s.source       = { :git => "https://github.com/qyfeng009/MBHUD.git", :tag => "#{
 #  Not including the public_header_files will make all headers public.
 #
 
-s.source_files  = "MBHUD/**/MBHUD.{h,m}"
+s.source_files  = "MBHUD/**/MBHUD.{h,m}", "MBHUD/**/MBHUD+Add.{h,m}", "MBHUD/**/MBHUD+Chain.{h,m}", "MBHUD/**/MBHUDHeader.h"
 # s.exclude_files = "Classes/Exclude"
 
 # s.public_header_files = "MBHUD/**/*.h"
